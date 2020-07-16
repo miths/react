@@ -74,7 +74,7 @@ class Contact extends Component {
                   <h3>Send us your Feedback</h3>
                 </div>
               <div className='col-12 col-md-9'>
-                <LocalForm onSubmit={(values)=>this.handleSubmit}>
+                <LocalForm onSubmit={(values)=>this.handleSubmit(values)}>
 
                   <Row className='form-group'>
                     <Label htmlFor= 'firstname' md={2}>First Name</Label>
@@ -169,8 +169,7 @@ class Contact extends Component {
                     <Col md={{size: 3, offset: 1}}>
                       <FormGroup check>
                         <Label check>
-                          <Control.select model='.contactType' name='contactType' className='form-control'
-                          onChange={this.handleInputChange}>
+                          <Control.select model='.contactType' name='contactType' className='form-control'>
                             <option>Tel.</option>
                             <option>Email</option>
                           </Control.select>

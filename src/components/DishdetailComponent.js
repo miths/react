@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { DISHES } from 'D:/ATOM docs/REACT/confusion/src/shared/dishes';
 import { Link } from 'react-router-dom';
+import { CommentForm } from './CommentFormComponent';
 
 const RenderDish=({dish})=>{
   console.log(dish)
@@ -33,6 +34,7 @@ function RenderComments({commArr}){
   console.log('yes')
   if (commArr!=null){
     console.log('yes')
+
     const displayComment = commArr.map((com)=>{
       return(
         <div>
@@ -53,6 +55,7 @@ function RenderComments({commArr}){
       <div>
       <h4>Comments</h4>
       {displayComment}
+      <CommentForm/>
       </div>
     )
   }
