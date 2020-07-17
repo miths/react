@@ -25,6 +25,8 @@ export class CommentForm extends Component {
     }
 
     handleSubmit(values) {
+        this.toggleModal();
+        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment)
         console.log('Current State is: ' + JSON.stringify(values));
         alert('Current State is: ' + JSON.stringify(values));
         // event.preventDefault();
@@ -64,13 +66,13 @@ export class CommentForm extends Component {
                                 </Row>
 
                                 <Row className='form-group col-sm-10 offset-1'>
-                                        <Label htmlFor='username'>
+                                        <Label htmlFor='author'>
                                             Username
                                         </Label>
-                                        <Control.text model='.username'
-                                            id='username'
-                                            name='username'
-                                            placeholder='Username'
+                                        <Control.text model='.author'
+                                            id='author'
+                                            name='author'
+                                            placeholder='Your Name'
                                             className='form-control'
                                             validators={{
                                                 required, minLength: minLength(3), maxLength: maxLength(15)
