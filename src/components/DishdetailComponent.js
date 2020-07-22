@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { CommentForm } from './CommentFormComponent';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 
 const RenderDish=({dish})=>{
@@ -14,13 +15,19 @@ const RenderDish=({dish})=>{
       return(
         // <div className='row'>
         // <div className='col-12 col-md-5 m-1'>
-          <Card>
-              <CardImg top src={baseUrl+dish.image} alt={dish.name} />
+        <FadeTransform 
+          in transformProps={{
+            exitTransform: 'scale(.5) translateY(-50%)'
+          }}>
+            <Card>
+              <CardImg top src={baseUrl + dish.image} alt={dish.name} />
               <CardBody>
                 <CardTitle>{dish.name}</CardTitle>
                 <CardText>{dish.description}</CardText>
               </CardBody>
-          </Card>
+            </Card>
+          </FadeTransform>
+          
         // </div>
         // </div>
       );
@@ -40,17 +47,22 @@ function RenderComments({commArr, postComment, dishId}){
 
     const displayComment = commArr.map((com)=>{
       return(
+        <Stagger in>
         <div>
-          <ul className='list-unstyled' key={com.id}>
-            <li>{com.comment}</li>
-            <li>--{com.author}, {new Intl.DateTimeFormat('en-US', {
-              year: 'numeric',
-              month: 'short',
-              day: '2-digit'
-            }).format(new Date(com.date))}</li>
-            <br/>
-          </ul>
+            <ul className='list-unstyled' key={com.id}>
+              <Fade in>
+                <li>{com.comment}</li>
+                <li>--{com.author}, {new Intl.DateTimeFormat('en-US', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: '2-digit'
+                }).format(new Date(com.date))}</li>
+              </Fade>
+                <br />
+              
+            </ul>
         </div>
+        </Stagger>
       );
     })
 
