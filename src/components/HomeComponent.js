@@ -56,7 +56,9 @@ function Home(props){
             errMess={props.promosErrMess}/>
         </div>
         <div className='col-12 col-md m-1'>
-        <RenderItem item={props.leader}/>
+        <RenderItem item={props.leader}
+          isLoading= {props.leadersLoading}
+          errMess= {props.leadersErrMess} />
         </div>
       </div>
     </div>

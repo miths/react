@@ -1,27 +1,49 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { baseUrl } from '../shared/baseUrl'
+import { Loading } from './LoadingComponent';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 
 
-
-    function RenderLeaders({leaderArr}) {
+    function RenderLeaders({leaderArr, isLoading, errMess}) {
       const displayLeader= leaderArr.map((leader) => {
          return(
-           <div key={leader.id}>
-                <Media tag="li">
-                  <Media left middle>
-                      <Media object src={leader.image} alt={leader.name} />
-                  </Media>
-                  <Media body className="ml-5">
-                    <Media heading>{leader.name}</Media>
-                    <p>{leader.designation}</p>
-                    <p>{leader.description}</p>
-                  </Media>
-                </Media>
-              </div>
+             <Stagger in>
+                <div key={leader.id}>
+                    <Fade in>
+                        <Media tag="li">
+                        <Media left middle>
+                            <Media object src={baseUrl + leader.image} alt={leader.name} />
+                        </Media>
+                        <Media body className="ml-5">
+                            <Media heading>{leader.name}</Media>
+                            <p>{ leader.designation}</p>
+                            <p>{ leader.description}</p>
+                        </Media>
+                        </Media>
+                     </Fade>
+                </div>
+             </Stagger>
          );
      })
+
+     if (isLoading){
+         return(
+             <div>
+                 <Loading/>
+             </div>
+         )
+     }
+
+     else if (errMess){
+         return(
+             <div>
+                 <h4>{errMess}</h4>
+             </div>
+         )
+     }
      return(
        <div>{displayLeader}</div>
      )
@@ -107,7 +129,7 @@ function About(props) {
                 </div>
                 <div className="col-12">
                     <Media list>
-                        <RenderLeaders leaderArr={props.leaders}/>
+                        <RenderLeaders leaderArr={props.leaders.leaders} isLoading={props.leaders.isLoading} errMess={props.leaders.errMess} />
                     </Media>
                 </div>
             </div>
